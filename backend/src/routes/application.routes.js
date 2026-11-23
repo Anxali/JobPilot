@@ -8,9 +8,9 @@ const {
     deleteApplication
 } = require('../controllers/applicationController');
 
-router.get('/', getApplications);
-router.post('/', createApplication);
-router.put('/:id', updateApplication);
-router.delete('/:id', deleteApplication);
+router.get('/getApplications', getApplications);
+router.post('/createApplication', createApplication);
+router.put('/update/:id', updateApplication);
+router.delete('/delete/:id', deleteApplication);
 
 module.exports = router;
