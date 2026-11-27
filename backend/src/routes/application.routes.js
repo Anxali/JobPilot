@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middleware/authMiddleware');
 
 const {
     getApplications,
@@ -7,6 +8,8 @@ const {
     updateApplication,
     deleteApplication
 } = require('../controllers/applicationController');
+
+router.use(authMiddleware);
 
 router.get('/getApplications', getApplications);
 router.post('/createApplication', createApplication);

@@ -62,7 +62,12 @@ async function loginUser(req, res) {
             return res.status(401).json({ message: 'Invalid email or password.' });
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+        if (!process.env.JWT_SECRET) {
+            console.error('JWT_SECRET is not configured.');
+            return res.status(500).json({ message: 'Unable to log in at this time.' });
+        }
+
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
         return res.status(200).json({
             message: 'Login successful.',
